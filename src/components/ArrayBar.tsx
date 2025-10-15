@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 interface ArrayBarProps {
   value: number;
   height: number;
@@ -19,18 +21,40 @@ const ArrayBar = ({ value, height, state, maxValue }: ArrayBarProps) => {
   const barHeight = (height / maxValue) * 400;
 
   return (
-    <div className="flex flex-col items-center justify-end flex-1 min-w-0 transition-all duration-300">
-      <div
-        className={`w-full rounded-t-md ${stateColors[state]} transition-all duration-500 ease-out shadow-lg relative`}
+    <motion.div 
+      layout
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ 
+        layout: { duration: 0.5, ease: "easeInOut" },
+        opacity: { duration: 0.3 },
+        scale: { duration: 0.3 }
+      }}
+      className="flex flex-col items-center justify-end flex-1 min-w-0"
+    >
+      <motion.div
+        layout
+        className={`w-full rounded-t-md ${stateColors[state]} shadow-lg relative`}
         style={{
           height: `${barHeight}px`,
         }}
+        animate={{
+          backgroundColor: state === 'comparing' ? 'hsl(var(--state-comparing))' :
+                          state === 'pivot' ? 'hsl(var(--state-pivot))' :
+                          state === 'sorted' ? 'hsl(var(--state-sorted))' :
+                          state === 'merging' ? 'hsl(var(--state-merging))' :
+                          'hsl(var(--state-default))'
+        }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
       >
-        <div className="absolute -top-9 left-1/2 -translate-x-1/2 text-sm font-bold text-foreground bg-card/90 backdrop-blur-sm px-2.5 py-1 rounded-md shadow-md border border-border/50 whitespace-nowrap">
+        <motion.div 
+          layout
+          className="absolute -top-9 left-1/2 -translate-x-1/2 text-sm font-bold text-foreground bg-card/90 backdrop-blur-sm px-2.5 py-1 rounded-md shadow-md border border-border/50 whitespace-nowrap"
+        >
           {value}
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 
