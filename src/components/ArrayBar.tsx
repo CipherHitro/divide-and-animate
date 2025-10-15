@@ -14,18 +14,19 @@ const ArrayBar = ({ value, height, state, maxValue }: ArrayBarProps) => {
     merging: 'bg-state-merging',
   };
 
-  const heightPercentage = (height / maxValue) * 100;
+  // Calculate proportional height - the bar height directly represents the value
+  // Max value gets full container height (400px), others are proportional
+  const barHeight = (height / maxValue) * 400;
 
   return (
-    <div className="flex flex-col items-center justify-end gap-3 flex-1 min-w-0 transition-all duration-300">
+    <div className="flex flex-col items-center justify-end flex-1 min-w-0 transition-all duration-300">
       <div
-        className={`w-full rounded-t-md ${stateColors[state]} transition-all duration-500 ease-out shadow-lg relative group`}
+        className={`w-full rounded-t-md ${stateColors[state]} transition-all duration-500 ease-out shadow-lg relative`}
         style={{
-          height: `${Math.max(heightPercentage, 8)}%`,
-          minHeight: '30px',
+          height: `${barHeight}px`,
         }}
       >
-        <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-sm font-bold text-foreground bg-card/80 backdrop-blur-sm px-2 py-1 rounded-md shadow-md border border-border/50">
+        <div className="absolute -top-9 left-1/2 -translate-x-1/2 text-sm font-bold text-foreground bg-card/90 backdrop-blur-sm px-2.5 py-1 rounded-md shadow-md border border-border/50 whitespace-nowrap">
           {value}
         </div>
       </div>
