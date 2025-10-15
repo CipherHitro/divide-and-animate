@@ -108,9 +108,9 @@ const QuickSort = () => {
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Visualization Area */}
           <div className="lg:col-span-2 space-y-6">
-            <Card className="shadow-strong border-border/50 animate-fade-in">
-              <CardContent className="p-6">
-                <div className="flex items-end justify-center gap-1 h-[400px] px-4">
+            <Card className="shadow-strong border-border/50 animate-fade-in overflow-hidden">
+              <CardContent className="p-8">
+                <div className="flex items-end justify-center gap-2 h-[450px] px-4 pb-4">
                   {currentStep?.array.map((value, index) => (
                     <ArrayBar
                       key={`${value}-${index}`}

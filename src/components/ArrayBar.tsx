@@ -17,15 +17,18 @@ const ArrayBar = ({ value, height, state, maxValue }: ArrayBarProps) => {
   const heightPercentage = (height / maxValue) * 100;
 
   return (
-    <div className="flex flex-col items-center justify-end gap-2 flex-1 min-w-0">
-      <span className="text-xs font-semibold text-foreground">{value}</span>
+    <div className="flex flex-col items-center justify-end gap-3 flex-1 min-w-0 transition-all duration-300">
       <div
-        className={`w-full rounded-t-lg ${stateColors[state]} transition-all duration-300 ease-in-out shadow-sm`}
+        className={`w-full rounded-t-md ${stateColors[state]} transition-all duration-500 ease-out shadow-lg relative group`}
         style={{
-          height: `${Math.max(heightPercentage, 10)}%`,
-          minHeight: '20px',
+          height: `${Math.max(heightPercentage, 8)}%`,
+          minHeight: '30px',
         }}
-      />
+      >
+        <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-sm font-bold text-foreground bg-card/80 backdrop-blur-sm px-2 py-1 rounded-md shadow-md border border-border/50">
+          {value}
+        </div>
+      </div>
     </div>
   );
 };
